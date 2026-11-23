@@ -30,7 +30,15 @@ export default function Booking({ packages, initial, policy, ready }) {
   }, []);
   async function pay(e) {
     e.preventDefault();
-    if (lock.current || !ready || !valid) return;
+    if (lock.current) return;
+    if (!valid) {
+      setError("Enter a whole number from 1 to 50 for your package quantity.");
+      return;
+    }
+    if (!ready) {
+      setError("Online payment is temporarily unavailable while the club completes setup. Please try again later.");
+      return;
+    }
     lock.current = true;
     setBusy(true);
     setError("");
@@ -141,6 +149,7 @@ export default function Booking({ packages, initial, policy, ready }) {
             name="phone"
             placeholder="+91…"
             pattern="[+]?[1-9][0-9]{7,14}"
+            title="Enter your country code and mobile number without spaces, for example +919876543210."
             autoComplete="tel"
             required
           />
@@ -171,7 +180,7 @@ export default function Booking({ packages, initial, policy, ready }) {
           Online payments will open after the club finishes checkout setup.
         </p>
       )}
-      <button className="gold" disabled={!ready || busy || !valid}>
+      <button className="gold" disabled={busy}>
         {busy ? "Opening checkout…" : "Continue to Razorpay"}
       </button>
       {error && <p role="alert">{error}</p>}
