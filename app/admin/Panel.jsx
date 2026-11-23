@@ -21,6 +21,7 @@ export default function Panel({ apiKey }) {
     [msg, setMsg] = useState(""),
     [reload, refresh] = useState(0);
   const locked = useRef(false);
+  const drawer = useRef(null);
   function logout() {
     setToken("");
     setRows(null);
@@ -141,15 +142,15 @@ export default function Panel({ apiKey }) {
     );
   const confirmed = (rows || []).filter((b) => b.status === "confirmed"),
     sum = (fn) => confirmed.reduce((n, b) => n + fn(b), 0);
-  return (
-    <>
-      <div className="deskTabs">
+  const menu = (
+    <div className="deskTabs">
         {["bookings", "packages", "settings"].map((t) => (
           <button
             aria-pressed={tab === t}
             key={t}
             disabled={busy}
             onClick={() => {
+              drawer.current?.close();
               setMsg("");
               setTab(t);
             }}
@@ -159,6 +160,16 @@ export default function Panel({ apiKey }) {
         ))}
         <button onClick={logout}>Sign out</button>
       </div>
+  );
+  return (
+    <>
+      <div className="desktopDeskMenu">{menu}</div>
+      <button className="deskBtn mobileDeskMenu" aria-haspopup="dialog" onClick={() => drawer.current.showModal()}>☰ Menu</button>
+      <dialog ref={drawer} className="deskDrawer" aria-label="Admin menu"
+        onClick={(e) => { if (e.target === drawer.current && e.clientX >= drawer.current.getBoundingClientRect().right) drawer.current.close(); }}>
+        <button className="deskBtn" onClick={() => drawer.current.close()}>Close menu</button>
+        {menu}
+      </dialog>
       <p role="status">{msg}</p>
       {tab === "bookings" && (
         <>
