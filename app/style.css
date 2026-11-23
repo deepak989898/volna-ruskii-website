@@ -395,3 +395,24 @@ select:focus-visible {
 .deskStats small {
   display: block;
 }
+
+.mobileDeskMenu { display: none; }
+.deskDrawer {
+  position: fixed;
+  inset: 0 auto 0 0;
+  margin: 0;
+  height: 100dvh;
+  max-height: none;
+  width: min(82vw, 320px);
+  box-sizing: border-box;
+  background: #101b30;
+  color: var(--ink);
+  border: 0;
+  padding: 24px;
+}
+.deskDrawer::backdrop { background: rgb(0 0 0 / 60%); }
+.deskDrawer .deskTabs { flex-direction: column; align-items: stretch; }
+@media (max-width: 680px) {
+  .desktopDeskMenu { display: none; }
+  .mobileDeskMenu { display: inline-block; }
+}
