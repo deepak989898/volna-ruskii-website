@@ -38,7 +38,6 @@ export default async function Layout({ children }) {
             <Link href="/contact">Location & contact</Link>
             <Link href="/cancellation">Cancellation policy</Link>
             <Link href="/privacy">Privacy</Link>
-            <Link href="/admin">Staff sign in</Link>
             {s.whatsapp && (
               <a href={"https://wa.me/" + s.whatsapp.replace(/\D/g, "")}>
                 WhatsApp
