@@ -117,6 +117,46 @@ export default function Panel({ apiKey }) {
       setBusy(false);
     }
   }
+  async function uploadHero(event) {
+    event.preventDefault();
+    if (locked.current) return;
+    const form = event.currentTarget;
+    const file = new FormData(form).get("hero");
+    if (!file?.size || !/\.mp4$/i.test(file.name) || file.size > 50 * 1024 * 1024) {
+      setMsg("Select an MP4 under 50 MB.");
+      return;
+    }
+    locked.current = true;
+    setBusy(true);
+    setMsg("Uploading hero video…");
+    async function request(body) {
+      const response = await fetch("/api/admin", {
+        method: "POST",
+        headers: { Authorization: "Bearer " + token, "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.error);
+      return result;
+    }
+    try {
+      const { object, upload } = await request({ type: "hero-start", size: file.size });
+      const response = await fetch(upload, {
+        method: "PUT",
+        headers: { "Content-Type": "video/mp4" },
+        body: file,
+      });
+      if (!response.ok) throw new Error("Upload failed. Please try again.");
+      await request({ type: "hero-publish", object });
+      form.reset();
+      setMsg("Hero video published. Refresh the homepage to see it.");
+    } catch (error) {
+      setMsg(error.message);
+    } finally {
+      locked.current = false;
+      setBusy(false);
+    }
+  }
   if (!token)
     return (
       <form className="deskbox fields" onSubmit={login}>
@@ -220,6 +260,18 @@ export default function Panel({ apiKey }) {
             </>
           )}
         </>
+      )}
+      {tab === "settings" && setup && (
+        <form className="deskbox" onSubmit={uploadHero}>
+          <h2>Homepage hero video</h2>
+          <div className="fields">
+            <label>
+              MP4 video (16:9, up to 50 MB)
+              <input name="hero" type="file" accept="video/mp4,.mp4" disabled={busy} required />
+            </label>
+          </div>
+          <button className="gold" disabled={busy}>Upload and publish</button>
+        </form>
       )}
       {tab === "settings" && setup && (
         <form
