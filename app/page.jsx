@@ -79,13 +79,27 @@ export default async function Home() {
           ))}
         </div>
       </section>
-      <section className="packages venueGallery" aria-labelledby="gallery-title">
+      <section id="gallery" className="packages venueGallery" aria-labelledby="gallery-title">
         <h2 id="gallery-title">Inside VOLNA</h2>
         <div className="venueGalleryGrid">
           {gallery.map(([file, alt]) => (
             <img key={file} src={`/gallery/${file}.webp`} alt={alt} loading="lazy" decoding="async" />
           ))}
         </div>
+      </section>
+      <section className="packages clubReel" aria-labelledby="club-reel-title">
+        <div>
+          <h2 id="club-reel-title">Live on the VOLNA stage</h2>
+          <p>A look inside the club in Arpora, Goa.</p>
+          <a href="https://www.instagram.com/club_volna_/reel/DfUtDz_uiFO/" target="_blank" rel="noreferrer">Watch on Instagram ↗</a>
+        </div>
+        <iframe
+          title="VOLNA live stage performance on Instagram"
+          src="https://www.instagram.com/reel/DfUtDz_uiFO/embed/"
+          loading="lazy"
+          allow="fullscreen"
+          allowFullScreen
+        />
       </section>
     </main>
   );
