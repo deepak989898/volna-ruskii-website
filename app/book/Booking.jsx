@@ -4,7 +4,11 @@ import { quote, money, today } from "../../lib/catalog";
 const packageInclusions = {
   entry: [
     "Limited dinner with vegetarian and non-vegetarian options",
-    "Unlimited beer",
+    "Unlimited drinks (club terms apply): Kingfisher Premium beer; Budweiser for early birds until 9 PM",
+    "Whisky: Blenders Pride, Signature or Royal Stag",
+    "Vodka: Magic Moments Verve",
+    "Rum: Old Monk; brandy: Mansion House",
+    "Limited energy drink",
     "One hookah pot per four guests",
     "Live Russian dance performances and DJ dance floor",
     "Temporary or permanent tattoo",
