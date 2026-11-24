@@ -52,8 +52,11 @@ export default async function Layout({ children }) {
               {s.email && <a href={"mailto:" + s.email}>{s.email}</a>}
               {!s.phone && !s.whatsapp && !s.email && <Link href="/contact">Visit &amp; contact details</Link>}
             </div>
-            <iframe title="Map of VOLNA and Arpora, Goa" loading="lazy" src={s.mapEmbedUrl}
-              allowFullScreen referrerPolicy="no-referrer-when-downgrade" />
+            <figure className="venueMap">
+              <iframe title="Map of VOLNA and Arpora, Goa" loading="lazy" src={s.mapEmbedUrl}
+                allowFullScreen referrerPolicy="no-referrer-when-downgrade" />
+              <figcaption>VOLNA Russian Night Club · Arpora, Goa</figcaption>
+            </figure>
           </div>
         </footer>
       </body>
