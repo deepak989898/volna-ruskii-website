@@ -1,3 +1,5 @@
+import { randomUUID } from "node:crypto";
+import { getStorage } from "firebase-admin/storage";
 import { getAuth } from "firebase-admin/auth";
 import { db } from "../../../lib/backend";
 import { defaults, googleMap } from "../../../lib/settings";
@@ -104,6 +106,39 @@ export function POST(req) {
     const data = await req.json().catch(() => null);
     requireValue(data && typeof data === "object", "Invalid request.");
     const store = db();
+    if (data.type === "hero-start" || data.type === "hero-publish") {
+      requireValue(process.env.FIREBASE_PROJECT_ID === "volnarussianclub-7fa10",
+        "Hero uploads require the Volna Firebase project.");
+      const bucket = getStorage().bucket("volnarussianclub-7fa10.firebasestorage.app");
+      const ref = store.doc("site/public");
+      const limit = 50 * 1024 * 1024;
+      if (data.type === "hero-start") {
+        requireValue(Number.isInteger(data.size) && data.size > 0 && data.size <= limit,
+          "Select an MP4 under 50 MB.");
+        const object = "hero/" + randomUUID() + ".mp4";
+        const [upload] = await bucket.file(object).createResumableUpload({
+          origin: new URL(req.url).origin,
+          metadata: {
+            contentType: "video/mp4",
+            cacheControl: "public, max-age=86400",
+            metadata: { firebaseStorageDownloadTokens: randomUUID(), uploadedBy: uid },
+          },
+          preconditionOpts: { ifGenerationMatch: 0 },
+        });
+        return reply({ object, upload });
+      }
+      requireValue(typeof data.object === "string" && /^hero\/[0-9a-f-]{36}\.mp4$/.test(data.object),
+        "Invalid video reference.");
+      const [meta] = await bucket.file(data.object).getMetadata();
+      const token = meta.metadata?.firebaseStorageDownloadTokens;
+      requireValue(meta.metadata?.uploadedBy === uid && meta.contentType === "video/mp4" &&
+        Number(meta.size) > 0 && Number(meta.size) <= limit && /^[0-9a-f-]{36}$/.test(token ?? ""),
+        "The video upload could not be verified.");
+      const url = "https://firebasestorage.googleapis.com/v0/b/" + bucket.name +
+        "/o/" + encodeURIComponent(data.object) + "?alt=media&token=" + token;
+      await ref.set({ heroVideoUrl: url }, { merge: true });
+      return reply({ saved: true });
+    }
     if (data.type === "desk") {
       requireValue(/^[a-f0-9]{40}$/.test(data.id), "Invalid booking.");
       const ref = store.collection("bookings").doc(data.id),
