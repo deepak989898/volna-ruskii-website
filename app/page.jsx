@@ -12,25 +12,19 @@ export default async function Home() {
           <h1>
             VOLNA<span>Russian Night Club</span>
           </h1>
-          <a
-            className="film"
-            href="https://www.youtube.com/shorts/BHbCeP3xWhM"
-            target="_blank"
-            rel="noreferrer"
-          >
+          <a className="film" href="#club-video">
             ▷ &nbsp; Watch the club show
           </a>
         </div>
-        <a
-          className="poster"
-          aria-label="Play VOLNA’s club video"
-          href="https://www.youtube.com/shorts/BHbCeP3xWhM"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <img src="/show.jpg" alt="Live performance at VOLNA" />
-          <span>▷</span>
-        </a>
+        <div className="poster" id="club-video">
+          <iframe
+            title="VOLNA Russian Night Club show"
+            src="https://www.youtube-nocookie.com/embed/BHbCeP3xWhM?playsinline=1"
+            allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+            allowFullScreen
+            referrerPolicy="strict-origin-when-cross-origin"
+          />
+        </div>
       </section>
       <section id="packages" className="packages">
         <h2>Choose your experience</h2>
