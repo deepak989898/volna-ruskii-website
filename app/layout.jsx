@@ -25,26 +25,28 @@ export default async function Layout({ children }) {
           </Link>
           <nav>
             <Link href="/#packages">Packages</Link>
+            <Link href="/#gallery">Gallery</Link>
             <Link href="/contact">Find us</Link>
           </nav>
         </header>
         {children}
         <footer className="venueFooter">
           <div className="footerGrid">
-            <div>
+            <div className="footerBrand">
               <strong>VOLNA</strong>
               <p>Russian Night Club</p>
               <address>{s.address}</address>
-              <a href={s.mapUrl} target="_blank" rel="noreferrer">Get directions ↗</a>
+              <a className="footerDirections" href={s.mapUrl} target="_blank" rel="noreferrer">Get directions ↗</a>
             </div>
             <nav aria-label="Venue and booking information">
+              <h2>Plan your visit</h2>
               <Link href="/#packages">Entry &amp; VIP packages</Link>
               <Link href="/contact">Location &amp; contact</Link>
               <Link href="/cancellation">Cancellation policy</Link>
               <Link href="/privacy">Privacy</Link>
             </nav>
             <div className="footerContact">
-              <b>Contact the club</b>
+              <h2>Contact the club</h2>
               {s.phone && <a href={"tel:" + s.phone}>{s.phone}</a>}
               {s.whatsapp && <a href={"https://wa.me/" + s.whatsapp.replace(/\D/g, "")}>WhatsApp</a>}
               {s.email && <a href={"mailto:" + s.email}>{s.email}</a>}
