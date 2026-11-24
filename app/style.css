@@ -599,6 +599,11 @@ body:has(.contactPage) .venueFooter .venueMap { display: none; }
 .siteMenuDrawer a { padding: 13px 8px; border-bottom: 1px solid var(--line); }
 @media (max-width: 680px) {
   .desktopSiteMenu { display: none; }
+  header > button.siteMenuToggle {
+    border-color: transparent;
+    background: transparent;
+    font-size: 19px;
+  }
   .siteMenuToggle {
     display: inline-grid;
     place-items: center;
