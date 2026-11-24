@@ -442,3 +442,20 @@ select:focus-visible {
 @media (max-width: 680px) {
   .contactGrid, .footerGrid { grid-template-columns: 1fr; gap: 18px; }
 }
+
+.venueGalleryGrid {
+  columns: 3;
+  column-gap: 16px;
+}
+.venueGalleryGrid img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-bottom: 16px;
+  border-radius: 10px;
+  break-inside: avoid;
+}
+@media (max-width: 680px) {
+  .venueGalleryGrid { columns: 2; column-gap: 10px; }
+  .venueGalleryGrid img { margin-bottom: 10px; }
+}

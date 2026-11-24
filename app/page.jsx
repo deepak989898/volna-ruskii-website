@@ -1,6 +1,33 @@
 import Link from "next/link";
 import { catalog } from "../lib/settings";
 import { quote, money } from "../lib/catalog";
+const gallery = [
+  [
+    "show-gold",
+    "Performer in a gold costume on the club stage"
+  ],
+  [
+    "dj",
+    "DJ performing at the VOLNA booth"
+  ],
+  [
+    "show-green",
+    "Stage performer under green lights"
+  ],
+  [
+    "show-stage",
+    "Live pole performance at VOLNA"
+  ],
+  [
+    "hookah",
+    "Hookah lounge at VOLNA"
+  ],
+  [
+    "show-pink",
+    "Stage performer in a pink costume"
+  ]
+];
+
 export default async function Home() {
   const packages = await catalog();
   return (
@@ -49,6 +76,14 @@ export default async function Home() {
                 {p.action} <b>→</b>
               </Link>
             </article>
+          ))}
+        </div>
+      </section>
+      <section className="packages venueGallery" aria-labelledby="gallery-title">
+        <h2 id="gallery-title">Inside VOLNA</h2>
+        <div className="venueGalleryGrid">
+          {gallery.map(([file, alt]) => (
+            <img key={file} src={`/gallery/${file}.webp`} alt={alt} loading="lazy" decoding="async" />
           ))}
         </div>
       </section>
