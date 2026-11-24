@@ -1,4 +1,5 @@
 import Link from "next/link";
+import HeroVideo from "./HeroVideo";
 import { catalog, settings } from "../lib/settings";
 import { quote, money } from "../lib/catalog";
 const gallery = [
@@ -33,8 +34,7 @@ export default async function Home() {
   return (
     <main>
       <section className="hero heroVideo">
-        <video className="heroBackdrop" aria-hidden="true" src={site.heroVideoUrl}
-          autoPlay muted loop playsInline preload="auto"
+        <HeroVideo src={site.heroVideoUrl}
           poster={site.heroVideoUrl.includes("/o/Volna-Homepage.mp4?") ? "/volna-hero-poster.webp" : undefined} />
         <div className="heroText">
           <h1>Volna Ruskii<span>Russian Night Club · Arpora, Goa</span></h1>
@@ -44,7 +44,7 @@ export default async function Home() {
         <h2>Choose your experience</h2>
         <div className="grid">
           {packages.map((p) => (
-            <article key={p.id}>
+            <article key={p.id} className={p.unit === "table" ? "packagePhoto packageTable" : "packagePhoto packageEntry"}>
               <h3>{p.name}</h3>
               <div className="price">
                 {money(p.price)}{" "}

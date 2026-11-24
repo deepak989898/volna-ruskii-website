@@ -530,3 +530,35 @@ body:has(.contactPage) .venueFooter .venueMap { display: none; }
   .heroVideo h1 { font-size: clamp(41px, 10vw, 68px); }
   .heroVideo h1 span { font-size: clamp(15px, 4vw, 24px); }
 }
+
+.heroPlay {
+  position: absolute;
+  right: 27%;
+  top: 56%;
+  translate: 50% -50%;
+  display: grid;
+  place-items: center;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  border: 2px solid #fff7e7;
+  color: #fff7e7;
+  background: #27080dab;
+  font-size: 23px;
+  cursor: pointer;
+}
+#packages .packagePhoto {
+  background: linear-gradient(90deg, #1b070bf5, #25090bb5 62%, #32090b65),
+    var(--package-photo) center 42% / cover no-repeat;
+  border-color: #bb76636e;
+}
+.packageEntry { --package-photo: url("/gallery/show-green.webp"); }
+.packageTable { --package-photo: url("/gallery/club-13.webp"); }
+#packages .packagePhoto .gold {
+  background: linear-gradient(115deg, #e05b52, #a62632);
+  color: #fff7e7;
+}
+@media (max-width: 680px) {
+  .hero.heroVideo:has(.heroPlay) { padding-bottom: 92px; }
+  .heroPlay { top: auto; bottom: 16px; right: 50%; translate: 50% 0; width: 54px; height: 54px; }
+}
