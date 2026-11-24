@@ -45,7 +45,7 @@ export default async function Home() {
         </div>
         <div className="poster" id="club-video">
           <video aria-label="VOLNA nightclub highlights" src={site.heroVideoUrl}
-            controls playsInline preload="metadata" poster="/show.jpg" />
+            autoPlay muted loop playsInline preload="auto" poster="/show.jpg" />
         </div>
       </section>
       <section id="packages" className="packages">
