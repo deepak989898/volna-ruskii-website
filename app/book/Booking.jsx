@@ -55,7 +55,9 @@ export default function Booking({ packages, initial, policy, ready }) {
         displayedTotal: q.total,
         date: fields.date,
         name: fields.name.trim(),
-        phone: fields.phone.trim(),
+        phone: /^\d{10}$/.test(fields.phone.trim())
+          ? "+91" + fields.phone.trim()
+          : fields.phone.trim(),
         policy,
       };
       await loadCheckout();
@@ -124,7 +126,7 @@ export default function Booking({ packages, initial, policy, ready }) {
         </label>
         <label>
           Visit date
-          <input type="date" name="date" min={today()} required />
+          <input type="date" name="date" min={today()} defaultValue={today()} required />
         </label>
         <label>
           {packages.find((p) => p.id === id).unit === "table"
@@ -144,26 +146,27 @@ export default function Booking({ packages, initial, policy, ready }) {
           <input name="name" autoComplete="name" maxLength="90" required />
         </label>
         <label>
-          Mobile number with country code
+          Mobile number
           <input
             type="tel"
             name="phone"
-            placeholder="+91…"
+            placeholder="10-digit number or +91…"
             pattern="[+]?[1-9][0-9]{7,14}"
-            title="Enter your country code and mobile number without spaces, for example +919876543210."
+            title="Enter a 10-digit Indian mobile number or an international number with its country code."
             autoComplete="tel"
             required
           />
         </label>
       </div>
       {q && (
-        <div className="summary">
+        <div className="summary bookingPrice">
           <h3>Price breakdown</h3>
-          <p>
-            {q.guests} guest{q.guests === 1 ? "" : "s"} · Total {money(q.total)}
-          </p>
-          <strong>Pay now {money(q.advance)}</strong>
-          <p>Due at the club {money(q.balance)}</p>
+          <p>{q.packageName} · {q.guests} guest{q.guests === 1 ? "" : "s"}</p>
+          <dl>
+            <div><dt>Total booking price</dt><dd>{money(q.total)}</dd></div>
+            <div className="bookingPayNow"><dt>Pay online now</dt><dd>{money(q.advance)}</dd></div>
+            <div><dt>Pay at the club</dt><dd>{money(q.balance)}</dd></div>
+          </dl>
         </div>
       )}
       {policy && (
