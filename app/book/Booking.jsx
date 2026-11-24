@@ -1,6 +1,27 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import { quote, money, today } from "../../lib/catalog";
+const packageInclusions = {
+  entry: [
+    "Limited dinner with vegetarian and non-vegetarian options",
+    "Unlimited beer",
+    "One hookah pot per four guests",
+    "Live Russian dance performances and DJ dance floor",
+    "Temporary or permanent tattoo",
+  ],
+  vip: [
+    "One VIP table for six guests",
+    "Choose one premium bottle: Black Label, Chivas Regal or Grey Goose",
+    "Choose one standard bottle: Red Label, Jameson or Absolut",
+    "Six Corona pints and six Budweiser pints",
+    "Choose two vegetarian starters: Paneer Tikka, Paneer Chilly or Honey Chilly Potato",
+    "Choose two non-vegetarian starters: Chicken Tikka, Chicken Chilly or Chicken Dry Fry",
+    "One masala papad and one peanut masala",
+    "One hookah pot",
+    "Water, soda and soft drinks",
+  ],
+};
+
 function loadCheckout() {
   if (window.Razorpay) return Promise.resolve();
   return new Promise((resolve, reject) => {
@@ -158,6 +179,14 @@ export default function Booking({ packages, initial, policy, ready }) {
           />
         </label>
       </div>
+      {packageInclusions[id] && (
+        <details className="summary" open>
+          <summary>What’s included in {packages.find((item) => item.id === id).name}</summary>
+          <ul>
+            {packageInclusions[id].map((item) => <li key={item}>{item}</li>)}
+          </ul>
+        </details>
+      )}
       {q && (
         <div className="summary bookingPrice">
           <h3>Price breakdown</h3>
