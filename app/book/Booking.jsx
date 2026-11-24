@@ -2,29 +2,45 @@
 import { useState, useEffect, useRef } from "react";
 import { quote, money, today } from "../../lib/catalog";
 const packageInclusions = {
-  entry: [
-    "Limited dinner with vegetarian and non-vegetarian options",
-    "Unlimited drinks (club terms apply): Kingfisher Premium beer; Budweiser for early birds until 9 PM",
-    "Whisky: Blenders Pride, Signature or Royal Stag",
-    "Vodka: Magic Moments Verve",
-    "Rum: Old Monk; brandy: Mansion House",
-    "Limited energy drink",
-    "Drinks, dinner and hookah are served until 1:00 AM (Goa time). The Budweiser offer ends at 9:00 PM.",
-    "One hookah pot per four guests",
-    "Live Russian dance performances and DJ dance floor",
-    "Temporary or permanent tattoo",
-  ],
-  vip: [
-    "One VIP table for six guests",
-    "Choose one premium bottle: Black Label, Chivas Regal or Grey Goose",
-    "Choose one standard bottle: Red Label, Jameson or Absolut",
-    "Six Corona pints and six Budweiser pints",
-    "Choose two vegetarian starters: Paneer Tikka, Paneer Chilly or Honey Chilly Potato",
-    "Choose two non-vegetarian starters: Chicken Tikka, Chicken Chilly or Chicken Dry Fry",
-    "One masala papad and one peanut masala",
-    "One hookah pot",
-    "Water, soda and soft drinks",
-  ],
+  entry: {
+    groups: [
+      ["Unlimited drinks", [
+        "Beer: Kingfisher Premium. Budweiser early-bird offer until 9 PM.",
+        "Whisky: Blenders Pride, Signature or Royal Stag",
+        "Vodka: Magic Moments Verve",
+        "Rum: Old Monk · Brandy: Mansion House",
+      ]],
+      ["Dinner & hookah", [
+        "Limited vegetarian or non-vegetarian dinner",
+        "One hookah pot per four guests",
+        "Limited energy drink",
+      ]],
+      ["Live entertainment", [
+        "Live Russian dance performances and DJ dance floor",
+        "Temporary or permanent tattoo",
+      ]],
+    ],
+    note: "Drinks, dinner and hookah are served until 1:00 AM (Goa time). Club terms apply.",
+  },
+  vip: {
+    groups: [
+      ["Drinks", [
+        "One premium bottle: Black Label, Chivas Regal or Grey Goose",
+        "One standard bottle: Red Label, Jameson or Absolut",
+        "Six Corona pints and six Budweiser pints",
+        "Water, soda and soft drinks",
+      ]],
+      ["Starters", [
+        "Choose two vegetarian starters: Paneer Tikka, Paneer Chilly or Honey Chilly Potato",
+        "Choose two non-vegetarian starters: Chicken Tikka, Chicken Chilly or Chicken Dry Fry",
+        "One masala papad and one peanut masala",
+      ]],
+      ["Table & hookah", [
+        "One VIP table for six guests",
+        "One hookah pot",
+      ]],
+    ],
+  },
 };
 
 function loadCheckout() {
@@ -151,11 +167,17 @@ export default function Booking({ packages, initial, policy, ready }) {
           </select>
         </label>
         {packageInclusions[id] && (
-          <details key={id} className="summary" style={{ gridColumn: "1 / -1", margin: 0 }} open>
+          <details key={id} className="bookingInclusions" open>
             <summary>What’s included in {packages.find((item) => item.id === id).name}</summary>
-            <ul>
-              {packageInclusions[id].map((item) => <li key={item}>{item}</li>)}
-            </ul>
+            <div className="inclusionGroups">
+              {packageInclusions[id].groups.map(([title, items]) => (
+                <section key={title} className="inclusionGroup">
+                  <h3>{title}</h3>
+                  <ul>{items.map((item) => <li key={item}>{item}</li>)}</ul>
+                </section>
+              ))}
+            </div>
+            {packageInclusions[id].note && <p className="inclusionNote">{packageInclusions[id].note}</p>}
           </details>
         )}
         <label>
