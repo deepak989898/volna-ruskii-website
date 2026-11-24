@@ -482,3 +482,9 @@ select:focus-visible {
   .clubReel { grid-template-columns: minmax(0, 1fr); }
   .clubReel iframe { max-width: 380px; justify-self: center; }
 }
+
+.venueMap { margin: 0; }
+.footerGrid .venueMap { grid-column: 1 / -1; }
+.venueMap iframe { display: block; width: 100%; margin-bottom: 0; }
+.venueMap figcaption { margin-top: 8px; color: var(--ink); font-weight: 600; }
+body:has(.contactPage) .venueFooter .venueMap { display: none; }
