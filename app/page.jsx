@@ -32,20 +32,12 @@ export default async function Home() {
   const [packages, site] = await Promise.all([catalog(), settings()]);
   return (
     <main>
-      <section className="hero">
-        <div className="light" />
+      <section className="hero heroVideo">
+        <video className="heroBackdrop" aria-hidden="true" src={site.heroVideoUrl}
+          autoPlay muted loop playsInline preload="auto"
+          poster={site.heroVideoUrl.includes("/o/Volna-Homepage.mp4?") ? "/volna-hero-poster.webp" : undefined} />
         <div className="heroText">
-          <p className="eyebrow">ARPORA · GOA</p>
-          <h1>
-            VOLNA<span>Russian Night Club</span>
-          </h1>
-          <a className="film" href="#club-video">
-            ▷ &nbsp; Watch the club show
-          </a>
-        </div>
-        <div className="poster" id="club-video">
-          <video aria-label="VOLNA nightclub highlights" src={site.heroVideoUrl}
-            autoPlay muted loop playsInline preload="auto" poster="/show.jpg" />
+          <h1>Volna Ruskii<span>Russian Night Club · Arpora, Goa</span></h1>
         </div>
       </section>
       <section id="packages" className="packages">
