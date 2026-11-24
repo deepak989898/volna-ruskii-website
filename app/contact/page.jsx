@@ -3,7 +3,7 @@ export const metadata = { title: "Location & contact" };
 export default async function Contact() {
   const s = await settings();
   return (
-    <main className="sheet venuePage">
+    <main className="sheet venuePage contactPage">
       <p className="eyebrow">ARPORA · GOA</p>
       <h1>Location &amp; contact</h1>
       <div className="contactGrid">
@@ -20,8 +20,11 @@ export default async function Contact() {
           {!s.phone && !s.whatsapp && !s.email && <p>Contact details are being updated. Use the map for directions to the club.</p>}
         </section>
       </div>
-      <iframe title="Map of VOLNA and Arpora, Goa" loading="lazy" src={s.mapEmbedUrl}
-        allowFullScreen referrerPolicy="no-referrer-when-downgrade" />
+      <figure className="venueMap">
+        <iframe title="Map of VOLNA and Arpora, Goa" loading="lazy" src={s.mapEmbedUrl}
+          allowFullScreen referrerPolicy="no-referrer-when-downgrade" />
+        <figcaption>VOLNA Russian Night Club · Arpora, Goa</figcaption>
+      </figure>
     </main>
   );
 }
