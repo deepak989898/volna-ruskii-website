@@ -81,6 +81,7 @@ export default async function Home() {
             <img key={file} src={`/gallery/${file}.webp`} alt={alt} loading="lazy" decoding="async" />
           ))}
         </div>
+        <Link className="gold" href="/gallery" style={{ marginTop: 16 }}>View all gallery ↗</Link>
       </section>
       <div className="packages clubReel">
         <a className="gold" href="https://www.instagram.com/club_volna_/reel/DfUtDz_uiFO/" target="_blank" rel="noreferrer">
