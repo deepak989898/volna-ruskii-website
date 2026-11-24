@@ -82,20 +82,11 @@ export default async function Home() {
           ))}
         </div>
       </section>
-      <section className="packages clubReel" aria-labelledby="club-reel-title">
-        <div>
-          <h2 id="club-reel-title">Live on the VOLNA stage</h2>
-          <p>A look inside the club in Arpora, Goa.</p>
-          <a href="https://www.instagram.com/club_volna_/reel/DfUtDz_uiFO/" target="_blank" rel="noreferrer">Watch on Instagram ↗</a>
-        </div>
-        <iframe
-          title="VOLNA live stage performance on Instagram"
-          src="https://www.instagram.com/reel/DfUtDz_uiFO/embed/"
-          loading="lazy"
-          allow="fullscreen"
-          allowFullScreen
-        />
-      </section>
+      <div className="packages clubReel">
+        <a className="gold" href="https://www.instagram.com/club_volna_/reel/DfUtDz_uiFO/" target="_blank" rel="noreferrer">
+          Watch on Instagram ↗
+        </a>
+      </div>
     </main>
   );
 }
