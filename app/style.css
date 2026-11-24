@@ -488,3 +488,9 @@ select:focus-visible {
 .venueMap iframe { display: block; width: 100%; margin-bottom: 0; }
 .venueMap figcaption { margin-top: 8px; color: var(--ink); font-weight: 600; }
 body:has(.contactPage) .venueFooter .venueMap { display: none; }
+
+.poster:has(video) { height: auto; aspect-ratio: 16 / 9; background: #000; }
+.poster video { display: block; width: 100%; height: 100%; object-fit: contain; }
+@media (max-width: 680px) {
+  .hero:has(.poster video) { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+}
