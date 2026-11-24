@@ -196,12 +196,12 @@ export default function Booking({ packages, initial, policy, ready }) {
         <div className="summary bookingPrice">
           <h3>Price breakdown</h3>
           <p>{q.packageName} · {q.guests} guest{q.guests === 1 ? "" : "s"}</p>
-          {id === "entry" && <p>10% online discount, up to ₹500 per booking for 1–10 guests.</p>}
+          {id === "entry" && <p>Online discount per guest: ₹200 for 1–3 guests or ₹500 for 4–10 guests.</p>}
           <dl>
             {q.discount > 0 && (
               <>
                 <div><dt>Regular price</dt><dd>{money(q.subtotal)}</dd></div>
-                <div><dt>Online booking discount</dt><dd>−{money(q.discount)}</dd></div>
+                <div><dt>Online discount ({money(q.discountPerGuest)} per guest)</dt><dd>−{money(q.discount)}</dd></div>
               </>
             )}
             <div><dt>Total booking price</dt><dd>{money(q.total)}</dd></div>

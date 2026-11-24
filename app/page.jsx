@@ -56,7 +56,7 @@ export default async function Home() {
               </div>
               <p>{p.description}</p>
               {quote(p.id, 1, packages).discount > 0 && (
-                <p>Online from {money(quote(p.id, 1, packages).total)} per guest · 10% off, up to ₹500 per booking for 1–10 guests.</p>
+                <p>Online offer per guest: ₹200 off for 1–3 guests or ₹500 off for 4–10 guests.</p>
               )}
               <p>
                 {money(quote(p.id, 1, packages).advance)} online ·{" "}
