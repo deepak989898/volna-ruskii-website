@@ -416,3 +416,29 @@ select:focus-visible {
   .desktopDeskMenu { display: none; }
   .mobileDeskMenu { display: inline-block; }
 }
+
+.poster iframe { display: block; width: 100%; height: 100%; border: 0; }
+.poster { scroll-margin-top: 20px; }
+.venueFooter { display: block; background: #0a1426; padding-block: 34px; }
+.footerGrid {
+  width: min(1120px, 100%);
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 26px;
+}
+.footerGrid nav, .footerContact { display: grid; gap: 10px; align-content: start; }
+.footerGrid a, .footerContact a { overflow-wrap: anywhere; }
+.footerGrid iframe { grid-column: 1 / -1; width: 100%; height: 240px; border: 0; border-radius: 12px; }
+.footerGrid address, .venueCard address { font-style: normal; margin-bottom: 12px; }
+.venuePage { max-width: 960px; }
+.contactGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.venueCard { padding: clamp(16px, 4vw, 30px); border: 1px solid var(--line); border-radius: 14px; background: #101b30; }
+.venueCard h2 { font-size: 25px; }
+.bookingForm .summary { padding: 18px; }
+.bookingForm button.gold { width: 100%; justify-content: center; }
+.bookingForm [role="alert"], .bookingForm [role="status"] { margin-block: 12px; color: #ffe1a6; }
+.bookingForm input, .bookingForm select { min-width: 0; }
+@media (max-width: 680px) {
+  .contactGrid, .footerGrid { grid-template-columns: 1fr; gap: 18px; }
+}
