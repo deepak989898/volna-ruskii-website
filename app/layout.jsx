@@ -3,6 +3,7 @@ import Link from "next/link";
 import { settings } from "../lib/settings";
 export const dynamic = "force-dynamic";
 export const metadata = {
+  icons: { icon: { url: "/volna-eagle.png", type: "image/png" } },
   title: {
     default: "VOLNA Russian Night Club | Entry & VIP Table in Arpora, Goa",
     template: "%s | VOLNA Russian Night Club",
