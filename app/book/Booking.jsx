@@ -103,7 +103,8 @@ export default function Booking({ packages, initial, policy, ready }) {
     }
   }
   return (
-    <form onSubmit={pay}>
+    <form className="venueCard bookingForm" onSubmit={pay}>
+      <h2>Booking details</h2>
       <div className="fields">
         <label>
           Package
@@ -157,6 +158,7 @@ export default function Booking({ packages, initial, policy, ready }) {
       </div>
       {q && (
         <div className="summary">
+          <h3>Price breakdown</h3>
           <p>
             {q.guests} guest{q.guests === 1 ? "" : "s"} · Total {money(q.total)}
           </p>
