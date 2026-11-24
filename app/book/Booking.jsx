@@ -145,6 +145,14 @@ export default function Booking({ packages, initial, policy, ready }) {
             ))}
           </select>
         </label>
+        {packageInclusions[id] && (
+          <details key={id} className="summary" style={{ gridColumn: "1 / -1", margin: 0 }} open>
+            <summary>What’s included in {packages.find((item) => item.id === id).name}</summary>
+            <ul>
+              {packageInclusions[id].map((item) => <li key={item}>{item}</li>)}
+            </ul>
+          </details>
+        )}
         <label>
           Visit date
           <input type="date" name="date" min={today()} defaultValue={today()} required />
@@ -179,14 +187,6 @@ export default function Booking({ packages, initial, policy, ready }) {
           />
         </label>
       </div>
-      {packageInclusions[id] && (
-        <details className="summary" open>
-          <summary>What’s included in {packages.find((item) => item.id === id).name}</summary>
-          <ul>
-            {packageInclusions[id].map((item) => <li key={item}>{item}</li>)}
-          </ul>
-        </details>
-      )}
       {q && (
         <div className="summary bookingPrice">
           <h3>Price breakdown</h3>
