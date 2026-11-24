@@ -27,6 +27,7 @@ export default async function Layout({ children }) {
           <nav>
             <Link href="/#packages">Packages</Link>
             <Link href="/gallery">Gallery</Link>
+            <Link href="/about">About Us</Link>
             <Link href="/contact">Find us</Link>
           </nav>
         </header>
