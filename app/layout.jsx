@@ -1,5 +1,6 @@
 import "./style.css";
 import Link from "next/link";
+import SiteMenu from "./SiteMenu";
 import { settings } from "../lib/settings";
 export const dynamic = "force-dynamic";
 export const metadata = {
@@ -24,12 +25,7 @@ export default async function Layout({ children }) {
               alt="Volna Russian Night Club Blue Eagle"
             />
           </Link>
-          <nav>
-            <Link href="/#packages">Packages</Link>
-            <Link href="/gallery">Gallery</Link>
-            <Link href="/about">About Us</Link>
-            <Link href="/contact">Find us</Link>
-          </nav>
+          <SiteMenu />
         </header>
         {children}
         <footer className="venueFooter">

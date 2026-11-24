@@ -580,3 +580,40 @@ body:has(.contactPage) .venueFooter .venueMap { display: none; }
   background: #3c1d23;
   border-color: #e28c89;
 }
+
+.siteMenuToggle { display: none; }
+.siteMenuDrawer {
+  position: fixed;
+  inset: 0 0 0 auto;
+  margin: 0;
+  width: min(82vw, 320px);
+  height: 100dvh;
+  max-height: none;
+  padding: 16px;
+  border: 0;
+  background: #210d13;
+  color: var(--ink);
+}
+.siteMenuDrawer::backdrop { background: #0009; }
+.siteMenuDrawer nav { display: grid; gap: 0; margin-top: 12px; }
+.siteMenuDrawer a { padding: 13px 8px; border-bottom: 1px solid var(--line); }
+@media (max-width: 680px) {
+  .desktopSiteMenu { display: none; }
+  .siteMenuToggle {
+    display: inline-grid;
+    place-items: center;
+    min-width: 44px;
+    min-height: 44px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #210d13;
+    color: var(--ink);
+    font-size: 24px;
+    cursor: pointer;
+  }
+  body:has(.siteMenuDrawer[open]) { overflow: hidden; }
+}
+@media (min-width: 681px) {
+  .siteMenuDrawer[open] { visibility: hidden; }
+  .siteMenuDrawer::backdrop { background: transparent; }
+}
