@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { catalog } from "../lib/settings";
+import { catalog, settings } from "../lib/settings";
 import { quote, money } from "../lib/catalog";
 const gallery = [
   [
@@ -29,7 +29,7 @@ const gallery = [
 ];
 
 export default async function Home() {
-  const packages = await catalog();
+  const [packages, site] = await Promise.all([catalog(), settings()]);
   return (
     <main>
       <section className="hero">
@@ -44,13 +44,8 @@ export default async function Home() {
           </a>
         </div>
         <div className="poster" id="club-video">
-          <iframe
-            title="VOLNA Russian Night Club show"
-            src="https://www.youtube-nocookie.com/embed/BHbCeP3xWhM?playsinline=1"
-            allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
-            allowFullScreen
-            referrerPolicy="strict-origin-when-cross-origin"
-          />
+          <video aria-label="VOLNA nightclub highlights" src={site.heroVideoUrl}
+            controls playsInline preload="metadata" poster="/show.jpg" />
         </div>
       </section>
       <section id="packages" className="packages">
